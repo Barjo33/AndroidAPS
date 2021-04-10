@@ -48,13 +48,13 @@ class XdripPlugin @Inject constructor(
         bgReading.date = bundle.getLong(Intents.EXTRA_TIMESTAMP)
         bgReading.raw = bundle.getDouble(Intents.EXTRA_RAW)
         if (bundle.containsKey(Intents.EXTRA_SENSOR_BATTERY)) sensorBatteryLevel = bundle.getInt(Intents.EXTRA_SENSOR_BATTERY)
-        val source = bundle.getString(Intents.XDRIP_DATA_SOURCE_DESCRIPTION, "no Source specified")
-        setSource(source)
+        // val source = bundle.getString(Intents.XDRIP_DATA_SOURCE_DESCRIPTION, "no Source specified")
+        setSource() // setSource(source)
         MainApp.getDbHelper().createIfNotExists(bgReading, "XDRIP")
     }
 
-    private fun setSource(source: String) {
-        advancedFiltering = source.contains("G5 Native") || source.contains("G6 Native")
+    private fun setSource() { // private fun setSource(source: String) {
+        advancedFiltering = true // advancedFiltering = source.contains("G5 Native") || source.contains("G6 Native")
     }
 
     override fun getSensorBatteryLevel(): Int {
